@@ -1,13 +1,11 @@
 # rasa-nlu-trainer
-simple tool to edit your training examples for [rasa NLU](https://github.com/golastmile/rasa_nlu)
+This is a tool to edit your training examples for [rasa NLU](https://github.com/golastmile/rasa_nlu)
+It was created by [Polgar Andras](https://github.com/azazdeaz).
 
-Use the [online version](https://azazdeaz.github.io/rasa-nlu-trainer/) or [install with npm](#install)
 
-> this is a work in progress
+Use the [online version](https://azazdeaz.github.io/rasa-nlu-trainer/) or [install with npm](#installation)
 
-> i'm looking forward to your feedback :)
-
-## install
+## installation
 
 `$ npm i -g rasa-nlu-trainer` (you'll need [nodejs and npm](https://nodejs.org/) for this)
 
