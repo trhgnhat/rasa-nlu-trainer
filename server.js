@@ -63,7 +63,7 @@ function readData(path) {
         json = JSON.parse(raw)
       }
       catch (error) {
-        return reject(`Cant parse json file "${path}"\n${error}`)
+        return reject(`Can't parse json file "${path}"\n${error}`)
       }
 
       if (!json.rasa_nlu_data) {
@@ -91,14 +91,14 @@ if (argv.source) {
     })
 }
 else {
-  console.log('searching for the trainging examles...')
+  console.log('searching for the training examples...')
   let isSearchingOver = false
   let inReading = 0
 
   function checkDone() {
     if (isSearchingOver && inReading === 0) {
       if (!sourceFile.isLoaded) {
-        throw new Error(`Can't find training file, please try to specify it wity the --source option`)
+        throw new Error(`Can't find training file, please try to specify it with the --source option`)
       }
       else {
         serve()
