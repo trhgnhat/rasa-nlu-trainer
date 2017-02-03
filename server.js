@@ -30,7 +30,7 @@ const argv = require('yargs')
     },
     port: {
       alias: 'p',
-      description: '<port>',
+      description: '<port> Port to listen on',
       requiresArg: true,
     },
     development: {
@@ -197,7 +197,7 @@ function serve() {
     app.listen(port)
     if (!argv.development) {
       const url = `http://localhost:${port}/`
-      console.log(`Listening at ${url}`)
+      console.log(`server listening at ${url}`)
       open(url)
     }
     else {
