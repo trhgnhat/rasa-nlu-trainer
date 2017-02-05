@@ -30,7 +30,7 @@ const argv = require('yargs')
     },
     port: {
       alias: 'p',
-      description: '<port>',
+      description: '<port> Port to listen on',
       requiresArg: true,
     },
     development: {
@@ -63,7 +63,7 @@ function readData(path) {
         json = JSON.parse(raw)
       }
       catch (error) {
-        return reject(`Cant parse json file "${path}"\n${error}`)
+        return reject(`Can't parse json file "${path}"\n${error}`)
       }
 
       if (!json.rasa_nlu_data) {
@@ -91,14 +91,14 @@ if (argv.source) {
     })
 }
 else {
-  console.log('searching for the trainging examles...')
+  console.log('searching for the training examples...')
   let isSearchingOver = false
   let inReading = 0
 
   function checkDone() {
     if (isSearchingOver && inReading === 0) {
       if (!sourceFile.isLoaded) {
-        throw new Error(`Can't find training file, please try to specify it wity the --source option`)
+        throw new Error(`Can't find training file, please try to specify it with the --source option`)
       }
       else {
         serve()
@@ -197,7 +197,7 @@ function serve() {
     app.listen(port)
     if (!argv.development) {
       const url = `http://localhost:${port}/`
-      console.log(`Listening at ${url}`)
+      console.log(`server listening at ${url}`)
       open(url)
     }
     else {
