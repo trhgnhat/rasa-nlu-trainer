@@ -11,7 +11,6 @@ import {LocaleProvider} from 'antd'
 import thunk from 'redux-thunk'
 import * as actions from './actions'
 import './index.css'
-import 'antd/dist/antd.min.css'
 import isOnline from './isOnline'
 
 const store = createStore(

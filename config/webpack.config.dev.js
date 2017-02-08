@@ -6,6 +6,7 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
+var lessVars = require('./lessVars')
 
 
 
@@ -79,7 +80,7 @@ module.exports = {
       'react-native': 'react-native-web'
     }
   },
-  
+
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
@@ -109,6 +110,7 @@ module.exports = {
         exclude: [
           /\.html$/,
           /\.(js|jsx)$/,
+          /\.less$/,
           /\.css$/,
           /\.json$/,
           /\.svg$/
@@ -125,12 +127,19 @@ module.exports = {
         include: paths.appSrc,
         loader: 'babel',
         query: {
-          
+          plugins: [
+            ['import', [{ libraryName: 'antd', style: true }]],  // import less
+          ],
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
           cacheDirectory: true
         }
+      },
+      // Parse less files and modify variables
+      {
+        test: /\.less$/,
+        loader: `style!css!postcss!less?{modifyVars:${JSON.stringify(lessVars)}}`
       },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -157,7 +166,7 @@ module.exports = {
       }
     ]
   },
-  
+
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
