@@ -3,6 +3,11 @@ const ROOT_PATH = process.env.NODE_ENV === 'production'
   ? '/'
   : 'http://localhost:4321/'
 
+export const RESET = 'RESET'
+export const reset = (): Object => ({
+  type: RESET,
+})
+
 export const EDIT = 'EDIT'
 export const edit = (index: number, value: Object): Object => ({
   type: EDIT,
