@@ -41,7 +41,7 @@ class ExampleTable extends Component {
         title='Add example'
         visible={Boolean(example)}
         onOk={() => saveAndClose()}
-        onClose={() => close()}
+        onCancel={() => close()}
         okText='add'
       >
         {example
