@@ -5,6 +5,7 @@ import { Button, Icon } from 'antd'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 import isOnline from './isOnline'
+import ClearButton from './ClearButton'
 import FileReaderInput from 'react-file-reader-input'
 import { saveAs } from 'file-saver'
 
@@ -59,13 +60,13 @@ class TopBar extends Component {
             as='text'
             onChange={(e, results) => this.handleFileInputChange(e, results)}
             >
-            <Button type='ghost' style={styles.button}>
+            <Button type='ghost' style={ styles.button }>
               <Icon type='upload' /> Click to Upload
             </Button>
           </FileReaderInput>
           <Button
             type={isUnsaved ? 'primary' : 'ghost'}
-            style={styles.button}
+            style={ styles.button }
             onClick={() => {
               var blob = new Blob(
                 [ JSON.stringify(examples, null, 2) ],
@@ -80,7 +81,7 @@ class TopBar extends Component {
       )
       : (
         <Button
-          style={styles.button}
+          style={ styles.button }
           type={isUnsaved ? 'primary' : 'default'}
           onClick={() => save(examples)}
         >
@@ -95,13 +96,14 @@ class TopBar extends Component {
         </h3>
         <div style={{flex: 1}} />
         <Button
-          style={styles.button}
+          style={ styles.button }
           type='primary'
           onClick={() => openAddModal()}
         >
           Add new example
         </Button>
         {fileButtons}
+        <ClearButton style={ styles.button }/>
       </div>
     )
   }

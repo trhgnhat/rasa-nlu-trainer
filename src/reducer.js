@@ -14,6 +14,7 @@ import {
   OPEN_ADD_MODAL,
   CLOSE_ADD_MODAL,
   SAVE_AND_CLOSE_ADD_MODAL,
+  RESET,
 } from './actions'
 
 const INITIAL_STATE = {
@@ -32,6 +33,20 @@ export default function reducer (
   const { type, payload } = action
 
   switch (type) {
+    case RESET: {
+      return {
+        ...state,
+        examples: {
+          rasa_nlu_data: {
+            common_examples: [],
+          }
+        },
+        isUnsaved: false,
+        selection: null,
+        expandeds: [],
+        idxExampleInModal: null,
+      }
+    }
     case EDIT: {
       const { index, value } = payload
       state = immutable.set(
