@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, Icon, Popover } from 'antd'
+import { Button, Popover } from 'antd'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 
