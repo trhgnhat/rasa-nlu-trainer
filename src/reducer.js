@@ -25,7 +25,7 @@ function createExample({text='', intent='', entities=[]}) {
     text,
     intent,
     entities,
-    updatedAt: new Date(),
+    updatedAt: Date.now(),
     isExpanded: false,
     id: (++exampleIDCounter).toString(),
   }
@@ -70,7 +70,7 @@ export default function reducer (
       state = immutable.assign(
         state,
         `examples.${getExampleIndex(id)}`,
-        { ...update, updatedAt: new Date() },
+        { ...update, updatedAt: Date.now() },
       )
       return { ...state, isUnsaved: true }
     }

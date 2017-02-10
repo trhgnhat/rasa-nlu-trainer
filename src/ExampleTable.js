@@ -29,6 +29,7 @@ class ExampleTable extends Component {
     this.state = {
       filterDropdownVisible: false,
       searchText: '',
+      tableChangedAt: Date.now(),
     }
   }
   render() {
@@ -42,7 +43,7 @@ class ExampleTable extends Component {
     const expandeds = examples
       .filter(example => example.isExpanded)
       .map(example => example.id)
-    const { searchText, filterDropdownVisible } = this.state
+    const { searchText, filterDropdownVisible, tableChangedAt } = this.state
     const columns = [
       {
         title: 'Intent',
@@ -58,7 +59,10 @@ class ExampleTable extends Component {
             intents={intents}
           />
         ),
-        onFilter: (value, example) => example.intent === value,
+        onFilter: (value, example) => (
+          tableChangedAt < example.updatedAt
+          || example.intent === value
+        ),
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
         },
@@ -78,7 +82,8 @@ class ExampleTable extends Component {
         },
         filteredValue: searchText ? [searchText] : null,
         onFilter: (value, example) => (
-          !value
+          tableChangedAt < example.updatedAt
+          || !value
           || example.text.indexOf(value) !== -1
         ),
         filterDropdown: (
@@ -134,6 +139,7 @@ class ExampleTable extends Component {
         expandedRowRender={(example) => (
           <ExampleEditor example={example} entityNames={entityNames}/>
         )}
+        onChange={() => this.setState({ tableChangedAt: Date.now() })}
       />
     )
   }
