@@ -9,25 +9,25 @@ export const reset = (): Object => ({
 })
 
 export const EDIT = 'EDIT'
-export const edit = (index: number, value: Object): Object => ({
+export const edit = (id: string, value: Object): Object => ({
   type: EDIT,
-  payload: { index, value }
+  payload: { id, value }
 })
 
 export const DELETE_EXAMPLE = 'DELETE_EXAMPLE'
-export const deleteExample = (index: number): Object => ({
+export const deleteExample = (id: string): Object => ({
   type: DELETE_EXAMPLE,
-  payload: { index }
+  payload: { id }
 })
 
 export const SET_SELECTION = 'SET_SELECTION'
 export const setSelection = (
-  index: number,
+  id: string,
   start: number,
   end: number,
 ): Object => ({
   type: SET_SELECTION,
-  payload: { index, start, end }
+  payload: { id, start, end }
 })
 
 export const FETCH_DATA = 'FETCH_DATA'
@@ -47,7 +47,7 @@ export const loadData = () => async (dispatch: Function): Promise<void> => {
 }
 
 export const SAVING_DONE = 'SAVING_DONE'
-export const save = (data: Object): Function =>  async (
+export const save = (source: string): Function =>  async (
   dispatch: Function
 ): Promise<void> => {
   const response = await fetch(`${ROOT_PATH}save`, {
@@ -56,7 +56,7 @@ export const save = (data: Object): Function =>  async (
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: source,
   })
   //TODO add progressing feedback
   const json = await response.json()
@@ -68,15 +68,15 @@ export const save = (data: Object): Function =>  async (
 }
 
 export const EXPAND = 'EXPAND'
-export const expand = (index: number): Object => ({
+export const expand = (id: string): Object => ({
   type: EXPAND,
-  payload: index
+  payload: { id }
 })
 
 export const COLLAPSE = 'COLLAPSE'
-export const collapse = (index: number): Object => ({
+export const collapse = (id: string): Object => ({
   type: COLLAPSE,
-  payload: index
+  payload: { id }
 })
 
 export const OPEN_ADD_MODAL = 'OPEN_ADD_MODAL'

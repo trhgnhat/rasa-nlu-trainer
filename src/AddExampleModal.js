@@ -9,11 +9,7 @@ import IntentEditor from './IntentEditor'
 import * as actions from './actions'
 
 const mapState = (state) => ({
-  index: state.idxExampleInModal,
-  example: state.examples
-    && state.examples.rasa_nlu_data
-    && state.examples.rasa_nlu_data.common_examples
-    && state.examples.rasa_nlu_data.common_examples[state.idxExampleInModal]
+  example: state.examples.find(({id}) => id === state.idExampleInModal)
 })
 
 const mapActions = dispatch => ({
@@ -29,7 +25,6 @@ class ExampleTable extends Component {
   render() {
     const {
       example,
-      index,
       intents,
       close,
       saveAndClose,
@@ -49,18 +44,16 @@ class ExampleTable extends Component {
             <div>
               <TextEditor
                 example={example}
-                index={index}
                 entityNames={entityNames}
                 style={{marginBottom: 5}}
               />
               <IntentEditor
                 example={example}
-                index={index}
                 intents={intents}
                 style={{marginBottom: 5}}
               />
               <EntityTable
-                index={index}
+                example={example}
                 entityNames={entityNames}
               />
             </div>

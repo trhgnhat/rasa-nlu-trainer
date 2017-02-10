@@ -2,6 +2,7 @@
 import immutable from 'object-path-immutable'
 import testData from './testData.json'
 import isOnline from './isOnline'
+import pick from 'lodash/pick'
 
 import {
   EDIT,
@@ -17,13 +18,30 @@ import {
   RESET,
 } from './actions'
 
+let exampleIDCounter = 0
+
+function createExample({text='', intent='', entities=[]}) {
+  return {
+    text,
+    intent,
+    entities,
+    updatedAt: new Date(),
+    isExpanded: false,
+    id: (++exampleIDCounter).toString(),
+  }
+}
+
+function prepareExamples(examples) {
+  return examples.map(example => createExample(example))
+}
+
 const INITIAL_STATE = {
   filename: 'testData.json',
-  examples: isOnline ? testData : null,
+  originalSource: isOnline ? testData : null,
+  examples: isOnline ? testData.rasa_nlu_data.common_examples : null,
   isUnsaved: false,
   selection: null,
-  expandeds: [],
-  idxExampleInModal: null,
+  idExampleInModal: null,
 }
 
 export default function reducer (
@@ -32,55 +50,51 @@ export default function reducer (
 ): Object {
   const { type, payload } = action
 
+  function getExampleIndex(_id: string) {
+    return state.examples.findIndex(({id}) => id === _id)
+  }
+
   switch (type) {
     case RESET: {
       return {
         ...state,
-        examples: {
-          rasa_nlu_data: {
-            common_examples: [],
-          }
-        },
+        examples: [],
         isUnsaved: false,
         selection: null,
-        expandeds: [],
-        idxExampleInModal: null,
+        idExampleInModal: null,
       }
     }
     case EDIT: {
-      const { index, value } = payload
-      state = immutable.set(
+      const { id, value } = payload
+      const update = pick(value, ['text', 'intent', 'entities'])
+      state = immutable.assign(
         state,
-        `examples.rasa_nlu_data.common_examples.${index}`,
-        value,
+        `examples.${getExampleIndex(id)}`,
+        { ...update, updatedAt: new Date() },
       )
-      return {...state, isUnsaved: true}
+      return { ...state, isUnsaved: true }
     }
     case DELETE_EXAMPLE: {
-      const { index } = payload
-      const expIndex = state.expandeds.indexOf(index)
-      if (expIndex !== -1) {
-        state = immutable.del(state, `expandeds.${expIndex}`)
-        state.expandeds = state.expandeds.map(i => i > index ? --i : i)
-      }
+      const { id } = payload
       state = immutable.del(
         state,
-        `examples.rasa_nlu_data.common_examples.${index}`,
+        `examples.${getExampleIndex(id)}`,
       )
-      return {...state, isUnsaved: true}
+      return { ...state, isUnsaved: true }
     }
     case SET_SELECTION: {
-      const { index, start, end } = payload
+      const { id, start, end } = payload
       if (start === end) {
         return state
       }
-      return immutable.set(state, `selection`, { index, start, end })
+      return immutable.set(state, `selection`, { idExample: id, start, end })
     }
     case FETCH_DATA: {
       const { data, path } = payload
       return {
         ...state,
-        examples: data,
+        examples: prepareExamples(data.rasa_nlu_data.common_examples),
+        originalSource: data,
         filename: path,
       }
     }
@@ -91,37 +105,42 @@ export default function reducer (
       }
     }
     case EXPAND: {
-      if (state.expandeds.indexOf(payload) !== -1) {
-        return state
-      }
-      return immutable.push(state, 'expandeds', payload)
+      const { id } = payload
+
+      return immutable.set(
+        state,
+        `examples.${getExampleIndex(id)}.isExpanded`,
+        true,
+      )
     }
     case COLLAPSE: {
-      const expIndex = state.expandeds.indexOf(payload)
-      if (expIndex === -1) {
-        return state
-      }
-      return immutable.del(state, `expandeds.${expIndex}`)
+      const { id } = payload
+
+      return immutable.set(
+        state,
+        `examples.${getExampleIndex(id)}.isExpanded`,
+        false,
+      )
     }
 
     case OPEN_ADD_MODAL: {
+      const example = createExample({})
       state = immutable.push(
         state,
-        `examples.rasa_nlu_data.common_examples`,
-        {text: '', intent: '', entities: []},
+        `examples`,
+        example,
       )
-      const index = state.examples.rasa_nlu_data.common_examples.length - 1
-      return immutable.set(state, `idxExampleInModal`, index)
+      return immutable.set(state, `idExampleInModal`, example.id)
     }
     case CLOSE_ADD_MODAL: {
       state = immutable.del(
         state,
-        `examples.rasa_nlu_data.common_examples.${state.idxExampleInModal}`,
+        `examples.${getExampleIndex(state.idExampleInModal)}`,
       )
-      return immutable.set(state, `idxExampleInModal`, null)
+      return immutable.set(state, `idExampleInModal`, null)
     }
     case SAVE_AND_CLOSE_ADD_MODAL: {
-      return immutable.set(state, `idxExampleInModal`, null)
+      return immutable.set(state, `idExampleInModal`, null)
     }
     default:
       return state

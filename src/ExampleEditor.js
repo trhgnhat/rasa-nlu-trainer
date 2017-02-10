@@ -7,22 +7,24 @@ import * as actions from './actions'
 import EntityTable from './EntityTable'
 
 const mapActions = dispatch => ({
-  deleteExample: (index) => {
-    dispatch(actions.deleteExample(index))
+  deleteExample: (idExample) => {
+    dispatch(actions.deleteExample(idExample))
   },
 })
 
 class ExampleEditor extends Component {
   render() {
-    const { index, deleteExample, entityNames } = this.props
+    const { example, deleteExample, entityNames } = this.props
 
     return (
       <div>
-        <EntityTable index={index} entityNames={entityNames} />
+        <EntityTable example={example} entityNames={entityNames} />
         <Button
           style={{ float: 'right' }}
-          onClick={() => deleteExample(index)}
-        >Delete example</Button>
+          onClick={() => deleteExample(example.id)}
+        >
+          Delete example
+        </Button>
       </div>
     )
   }

@@ -27,26 +27,26 @@ const styles = {
 }
 
 const mapActions = dispatch => ({
-  edit: (index, example) => {
-    dispatch(actions.edit(index, example))
+  edit: (idExample, update) => {
+    dispatch(actions.edit(idExample, update))
   },
-  setSelection: (index, start, end) => {
-    dispatch(actions.setSelection(index, start, end))
+  setSelection: (idExample, start, end) => {
+    dispatch(actions.setSelection(idExample, start, end))
   },
 })
 
-class ExampleEditor extends Component {
+class TextEditor extends Component {
   selectionAnchorNode: Node;
   inputNode: HTMLInputElement;
 
   componentDidMount() {
     document.addEventListener('selectionchange', () => {
-      const { setSelection, index } = this.props
+      const { setSelection, example } = this.props
       const selection = window.getSelection()
 
       if (selection.anchorNode === this.selectionAnchorNode) {
         setSelection(
-          index,
+          example.id,
           this.inputNode.selectionStart,
           this.inputNode.selectionEnd,
         )
@@ -56,16 +56,17 @@ class ExampleEditor extends Component {
 
   handleTextChange(event: Object) {
     const {
-      example: oldExample,
-      index: exampleIndex,
+      example,
       edit,
     } = this.props
     const {
       text: oldText,
       entities: oldEntities,
-    } = oldExample
+    } = example
     const text = event.target.value
     const entities = []
+
+    //update the entity boudaries
 
     oldEntities.forEach(oldEntity => {
       const oldSelection = oldText.substr(
@@ -111,9 +112,8 @@ class ExampleEditor extends Component {
       })
     })
 
-    edit(exampleIndex, {
+    edit(example.id, {
       text,
-      intent: oldExample.intent,
       entities,
     })
   }
@@ -160,7 +160,7 @@ class ExampleEditor extends Component {
   }
 }
 
-ExampleEditor.propTypes = {
+TextEditor.propTypes = {
   example: PropTypes.shape({
     text: PropTypes.string.isRequired,
     entities: PropTypes.arrayOf(PropTypes.shape({
@@ -172,4 +172,4 @@ ExampleEditor.propTypes = {
   })
 }
 
-export default connect(null, mapActions)(ExampleEditor)
+export default connect(null, mapActions)(TextEditor)

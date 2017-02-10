@@ -6,19 +6,17 @@ import { connect } from 'react-redux'
 import * as actions from './actions'
 
 const mapActions = dispatch => ({
-  edit: (index, example) => {
-    dispatch(actions.edit(index, example))
+  edit: (idExample, update) => {
+    dispatch(actions.edit(idExample, update))
   },
 })
 
 class IntentEditor extends Component {
   handleIntentChange(intent: string) {
-    const { example, edit, index } = this.props
+    const { edit, example } = this.props
 
-    edit(index, {
-      text: example.text,
+    edit(example.id, {
       intent,
-      entities: example.entities,
     })
   }
 

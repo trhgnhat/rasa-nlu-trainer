@@ -4,19 +4,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import reducer from './reducer'
 import enUS from 'antd/lib/locale-provider/en_US'
-import {LocaleProvider} from 'antd'
-import thunk from 'redux-thunk'
+import { LocaleProvider } from 'antd'
 import * as actions from './actions'
 import './index.css'
 import isOnline from './isOnline'
-
-const store = createStore(
-  reducer,
-  applyMiddleware(thunk),
-)
+import store from './store'
 
 // only request data from the server if it is running locally
 if (!isOnline) {
@@ -31,4 +24,4 @@ ReactDOM.render(
     </LocaleProvider>
   </Provider>,
   document.getElementById('root')
-);
+)

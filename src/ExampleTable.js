@@ -9,18 +9,15 @@ import IntentEditor from './IntentEditor'
 import * as actions from './actions'
 
 const mapState = (state) => ({
-  expandeds: state.expandeds,
   examples: state.examples
-    && state.examples.rasa_nlu_data
-    && state.examples.rasa_nlu_data.common_examples
 })
 
 const mapActions = dispatch => ({
-  expand: (index) => {
-    dispatch(actions.expand(index))
+  expand: (idExample) => {
+    dispatch(actions.expand(idExample))
   },
-  collapse: (index) => {
-    dispatch(actions.collapse(index))
+  collapse: (idExample) => {
+    dispatch(actions.collapse(idExample))
   },
 })
 
@@ -37,12 +34,14 @@ class ExampleTable extends Component {
   render() {
     const {
       examples,
-      expandeds,
       expand,
       collapse,
       intents,
       entityNames,
     } = this.props
+    const expandeds = examples
+      .filter(example => example.isExpanded)
+      .map(example => example.id)
     const { searchText, filterDropdownVisible } = this.state
     const columns = [
       {
@@ -56,7 +55,6 @@ class ExampleTable extends Component {
         render: (_, example) => (
           <IntentEditor
             example={example}
-            index={example.index}
             intents={intents}
           />
         ),
@@ -73,7 +71,6 @@ class ExampleTable extends Component {
           <TextEditor
             example={example}
             entityNames={entityNames}
-            index={example.index}
           />
         ),
         sorter: (a, b) => {
@@ -106,26 +103,26 @@ class ExampleTable extends Component {
     return (
       <Table
         columns={columns}
-        dataSource={examples.map((example, index) => ({...example, index}))}
-        rowKey='index'
+        dataSource={examples}
+        rowKey='id'
         size='middle'
         expandedRowKeys={expandeds}
         onExpand={(expanded, example) => {
           if (expanded) {
-            expand(example.index)
+            expand(example.id)
           }
           else {
-            collapse(example.index)
+            collapse(example.id)
           }
         }}
         onRowClick={(example, index, event) => {
           //TODO: use expandRowByClick prop instead of this hack
           if (event.target.nodeName === 'TD') {
-            if (expandeds.indexOf(example.index) !== -1) {
-              collapse(example.index)
+            if (expandeds.indexOf(example.id) !== -1) {
+              collapse(example.id)
             }
             else {
-              expand(example.index)
+              expand(example.id)
             }
           }
         }}
@@ -135,7 +132,7 @@ class ExampleTable extends Component {
           defaultPageSize: 40,
         }}
         expandedRowRender={(example) => (
-          <ExampleEditor {...example} entityNames={entityNames}/>
+          <ExampleEditor example={example} entityNames={entityNames}/>
         )}
       />
     )

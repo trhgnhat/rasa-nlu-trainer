@@ -7,9 +7,8 @@ import * as actions from './actions'
 import immutable from 'object-path-immutable'
 
 const mapState = (state, props) => {
-  const { index } = props
-  const example = state.examples.rasa_nlu_data.common_examples[index]
-  const selection = state.selection && state.selection.index === index
+  const { example } = props
+  const selection = state.selection && state.selection.idExample === example.id
     ? state.selection
     : null
   return {
@@ -19,18 +18,18 @@ const mapState = (state, props) => {
 }
 
 const mapActions = dispatch => ({
-  edit: (index, example) => {
-    dispatch(actions.edit(index, example))
+  edit: (idExample, update) => {
+    dispatch(actions.edit(idExample, update))
   }
 })
 
 class EntityTable extends Component {
   handleChange(entityIndex, key, value) {
-    const { example, index, edit } = this.props
-    edit(index, immutable.set(example, `entities.${entityIndex}.${key}`, value))
+    const { example, edit } = this.props
+    edit(example.id, immutable.set(example, `entities.${entityIndex}.${key}`, value))
   }
   renderAddButton() {
-    const { index, edit, example, selection } = this.props
+    const { edit, example, selection } = this.props
     const selectionText = selection
       ? example.text.substr(selection.start, selection.end - selection.start)
       : null
@@ -41,7 +40,7 @@ class EntityTable extends Component {
           type='primary'
           onClick={() => {
             edit(
-              index,
+              example.id,
               immutable.push(example, `entities`, {
                 start: selection.start,
                 end: selection.end,
@@ -60,7 +59,7 @@ class EntityTable extends Component {
       )
   }
   render() {
-    const { example, edit, index, entityNames } = this.props
+    const { example, edit, entityNames } = this.props
     const entities = example.entities || []
 
     const columns = [
@@ -110,7 +109,7 @@ class EntityTable extends Component {
         render: (_, entity) => (
           <span>
             <Icon type='delete' onClick={() => {
-              edit(index, immutable.del(example, `entities.${entity.index}`))
+              edit(example.id, immutable.del(example, `entities.${entity.index}`))
             }}/>
           </span>
         ),

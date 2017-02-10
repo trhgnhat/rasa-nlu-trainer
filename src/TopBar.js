@@ -8,6 +8,7 @@ import isOnline from './isOnline'
 import ClearButton from './ClearButton'
 import FileReaderInput from 'react-file-reader-input'
 import { saveAs } from 'file-saver'
+import generateExport from './generateExport'
 
 const mapState = (state) => ({
   filename: state.filename || 'loading...',
@@ -45,13 +46,12 @@ class TopBar extends Component {
     catch (e) {
       return alert('Can\'t JSON parse the selected file :(')
     }
-    if (!data.rasa_nlu_data || !data.rasa_nlu_data.common_examples) {
-      return alert(`Invalid JSON structure. It has to be like: {rasa_nlu_data: {common_examples: []}}`)
-    }
+    data.rasa_nlu_data = data.rasa_nlu_data || {}
+    data.rasa_nlu_data.common_examples = data.rasa_nlu_data.common_examples || []
     this.props.fetchData(file.name, data)
   }
   render() {
-    const { filename, isUnsaved, examples, save, openAddModal } = this.props
+    const { filename, isUnsaved, save, openAddModal } = this.props
 
     const fileButtons = isOnline
       ? (
@@ -69,7 +69,7 @@ class TopBar extends Component {
             style={ styles.button }
             onClick={() => {
               var blob = new Blob(
-                [ JSON.stringify(examples, null, 2) ],
+                [ generateExport() ],
                 { type: "application/json;charset=utf-8" },
               )
               saveAs(blob, filename)
@@ -83,7 +83,7 @@ class TopBar extends Component {
         <Button
           style={ styles.button }
           type={isUnsaved ? 'primary' : 'default'}
-          onClick={() => save(examples)}
+          onClick={() => save(generateExport())}
         >
           Save
         </Button>
