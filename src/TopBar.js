@@ -60,18 +60,19 @@ class TopBar extends Component {
             as='text'
             onChange={(e, results) => this.handleFileInputChange(e, results)}
             >
-            <Button type='ghost' style={ styles.button }>
+            <Button type='ghost' style={styles.button}>
               <Icon type='upload' /> Click to Upload
             </Button>
           </FileReaderInput>
           <Button
             type={isUnsaved ? 'primary' : 'ghost'}
-            style={ styles.button }
+            style={styles.button}
             onClick={() => {
               var blob = new Blob(
                 [ generateExport() ],
-                { type: "application/json;charset=utf-8" },
+                { type: 'text/plain;charset=utf-8' },
               )
+              debugger
               saveAs(blob, filename)
             }}
           >
