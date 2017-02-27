@@ -69,9 +69,6 @@ function readData(path) {
       if (!json.rasa_nlu_data) {
         return reject('"rasa_nlu_data" is undefined')
       }
-      if (!json.rasa_nlu_data.common_examples) {
-        return reject('"rasa_nlu_data.common_examples" is undefined')
-      }
 
       resolve(json)
     })
@@ -118,7 +115,7 @@ else {
       inReading++
       readData(file)
         .then(data => {
-          if (!sourceFile.isLoaded) { // an other file could be loaded in the meantime
+          if (!sourceFile.isLoaded) { // an other file could have been loaded in the meantime
             sourceFile.data = data,
             sourceFile.path = file
             sourceFile.isLoaded = true
@@ -137,7 +134,6 @@ else {
     isSearchingOver = true
     checkDone()
   })
-
 }
 
 function serve() {
@@ -169,10 +165,7 @@ function serve() {
 
   app.post('/save', function (req, res) {
     const data = req.body
-    if (!data
-      || !data.rasa_nlu_data
-      || !data.rasa_nlu_data.common_examples
-    ) {
+    if (!data || !data.rasa_nlu_data) {
       res.json({error: 'file is invalid'})
     }
     fs.writeFile(sourceFile.path, JSON.stringify(data, null, 2), (error) => {

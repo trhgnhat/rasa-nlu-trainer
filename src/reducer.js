@@ -31,7 +31,7 @@ function createExample({text='', intent='', entities=[]}) {
   }
 }
 
-function prepareExamples(examples) {
+function prepareExamples(examples = []) {
   return examples.map(example => createExample(example))
 }
 
