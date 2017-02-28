@@ -3,8 +3,8 @@
 import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
-import getColor from './getColor'
-import * as actions from './actions'
+import getColor from '../utils/getColor'
+import * as actions from '../state/actions'
 import { Input } from 'antd'
 
 const styles = {

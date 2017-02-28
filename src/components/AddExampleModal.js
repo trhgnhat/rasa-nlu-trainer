@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import EntityTable from './EntityTable'
 import TextEditor from './TextEditor'
 import IntentEditor from './IntentEditor'
-import * as actions from './actions'
+import * as actions from '../state/actions'
 
 const mapState = (state) => ({
   example: state.examples.find(({id}) => id === state.idExampleInModal)

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Table, Input, Button, Icon, AutoComplete } from 'antd'
 import { connect } from 'react-redux'
-import * as actions from './actions'
+import * as actions from '../state/actions'
 import immutable from 'object-path-immutable'
 
 const mapState = (state, props) => {

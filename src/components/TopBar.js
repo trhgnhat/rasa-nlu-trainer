@@ -3,12 +3,12 @@
 import React, { Component } from 'react';
 import { Button, Icon } from 'antd'
 import { connect } from 'react-redux'
-import * as actions from './actions'
-import isOnline from './isOnline'
+import * as actions from '../state/actions'
+import isOnline from '../utils/isOnline'
 import ClearButton from './ClearButton'
 import FileReaderInput from 'react-file-reader-input'
 import { saveAs } from 'file-saver'
-import generateExport from './generateExport'
+import generateExport from '../utils/generateExport'
 
 const mapState = (state) => ({
   filename: state.filename || 'loading...',

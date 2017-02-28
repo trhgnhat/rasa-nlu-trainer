@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import ExampleEditor from './ExampleEditor'
 import TextEditor from './TextEditor'
 import IntentEditor from './IntentEditor'
-import * as actions from './actions'
+import * as actions from '../state/actions'
 
 const mapState = (state) => ({
   examples: state.examples

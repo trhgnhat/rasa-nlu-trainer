@@ -1,7 +1,7 @@
 // @flow
 import immutable from 'object-path-immutable'
 import testData from './testData.json'
-import isOnline from './isOnline'
+import isOnline from '../utils/isOnline'
 import pick from 'lodash/pick'
 
 import {

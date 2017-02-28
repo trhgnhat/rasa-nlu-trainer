@@ -1,4 +1,4 @@
-import store from './store'
+import store from '../state/store'
 import immutable from 'object-path-immutable'
 
 export default function () {
