@@ -17,15 +17,18 @@ const colors = [
   { name: 'aqua',    bg: '#7fdbff', },
 ]
 
+const unknownColor = { name: 'grey', bg: '#aaaaaa', }
+
 export default function getColor(no) {
   const rand = randomSeed.create(TODAY)
   const startIndex = rand(colors.length)
-  const index = (startIndex + no) % colors.length
-  const fallbackIndex = (index !== -1) ? index : 1;
+  const color = no < 0
+    ? unknownColor
+    : colors[(startIndex + no) % colors.length]
+
   return {
-    backgroundColor: colors[fallbackIndex].bg,
+    backgroundColor: color.bg,
     opacity: 0.3,
-    //filter: 'blur(0px)',
   }
 }
 
