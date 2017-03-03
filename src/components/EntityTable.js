@@ -45,7 +45,7 @@ class EntityTable extends Component {
                 start: selection.start,
                 end: selection.end,
                 value: selectionText,
-                entity: '',
+                entity: selectionText,
               }))
           }}
         >

@@ -123,7 +123,6 @@ class TextEditor extends Component {
     const start = text.substr(0, entity.start)
     const value = text.substr(entity.start, entity.end - entity.start)
     const end = text.substr(entity.end)
-
     return (
       <div key={key} style={{...styles.zeroPos, ...styles.highlightText}}>
         <span>{start}</span>
