@@ -44,7 +44,10 @@ class TextEditor extends Component {
       const { setSelection, example } = this.props
       const selection = window.getSelection()
 
-      if (selection.anchorNode === this.selectionAnchorNode) {
+      if (
+        selection.anchorNode
+        && selection.anchorNode === this.selectionAnchorNode
+      ) {
         setSelection(
           example.id,
           this.inputNode.selectionStart,
