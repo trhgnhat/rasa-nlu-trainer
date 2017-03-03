@@ -21,9 +21,9 @@ export default function getColor(no) {
   const rand = randomSeed.create(TODAY)
   const startIndex = rand(colors.length)
   const index = (startIndex + no) % colors.length
-
+  const fallbackIndex = (index !== -1) ? index : 1;
   return {
-    backgroundColor: colors[index].bg,
+    backgroundColor: colors[fallbackIndex].bg,
     opacity: 0.3,
     //filter: 'blur(0px)',
   }
