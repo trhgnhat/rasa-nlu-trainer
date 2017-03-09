@@ -102,3 +102,8 @@ body {
 .anticon-delete:hover{
   color:#00C4ED;
 }
+
+/* Fixed header */
+.example-table .ant-table-title {
+  padding: 0px;
+}

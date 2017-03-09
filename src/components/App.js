@@ -41,9 +41,15 @@ class App extends Component {
 
     return (
       <div>
-        <TopBar />
-        <ExampleTable intents={intents} entityNames={entityNames} />
-        <AddExampleModal intents={intents} entityNames={entityNames} />
+        <ExampleTable
+          intents={intents}
+          entityNames={entityNames}
+          header={() => <TopBar />}
+        />
+        <AddExampleModal
+          intents={intents}
+          entityNames={entityNames}
+        />
         <CompatibilityAlert />
       </div>
     )

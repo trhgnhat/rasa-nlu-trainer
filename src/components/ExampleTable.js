@@ -66,7 +66,7 @@ class ExampleTable extends Component {
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
         },
-        width: '30%',
+        width: 250
       }, {
         title: 'Text',
         dataIndex: 'text',
@@ -101,12 +101,17 @@ class ExampleTable extends Component {
         onFilterDropdownVisibleChange: visible => this.setState({
           filterDropdownVisible: visible
         }),
-        width: '70%',
       },
     ]
 
+    // HACK to make the table exactly as high as the window with fixed header
+    const scrollHeight = window.innerHeight - (41+32+32+22)
+    
     return (
       <Table
+        title={this.props.header}
+        className='example-table'
+        scroll={{ y: scrollHeight }}
         columns={columns}
         dataSource={examples}
         rowKey='id'
@@ -137,7 +142,7 @@ class ExampleTable extends Component {
           defaultPageSize: 40,
         }}
         expandedRowRender={(example) => (
-          <ExampleEditor example={example} entityNames={entityNames}/>
+          <ExampleEditor example={example} entityNames={entityNames} />
         )}
         onChange={() => this.setState({ tableChangedAt: Date.now() })}
       />
