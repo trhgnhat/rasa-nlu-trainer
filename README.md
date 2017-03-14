@@ -31,6 +31,7 @@ this will open the editor in your browser
 from here, the `$ rasa-nlu-trainer` command will start the development version
 
 run `$ npm run build` again to update the build
+
 run `$ npm unlink && npm i -g rasa-nlu-trainer` to use the npm version again
 
 
