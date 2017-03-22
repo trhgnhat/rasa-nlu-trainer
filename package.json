@@ -1,6 +1,6 @@
 {
   "name": "rasa-nlu-trainer",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "devDependencies": {
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
