@@ -37557,6 +37557,7 @@
 	      _ref$entities = _ref.entities,
 	      entities = _ref$entities === undefined ? [] : _ref$entities;
 	
+	  console.log(exampleIDCounter);
 	  return {
 	    text: text,
 	    intent: intent,
@@ -67605,4 +67606,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.ef674935.js.map
+//# sourceMappingURL=main.edaad106.js.map
