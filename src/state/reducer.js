@@ -38,7 +38,9 @@ function prepareExamples(examples = []) {
 const INITIAL_STATE = {
   filename: 'testData.json',
   originalSource: isOnline ? testData : null,
-  examples: isOnline ? testData.rasa_nlu_data.common_examples : null,
+  examples: isOnline
+    ? testData.rasa_nlu_data.common_examples.map(e => createExample(e))
+    : null,
   isUnsaved: false,
   selection: null,
   idExampleInModal: null,
