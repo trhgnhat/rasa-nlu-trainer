@@ -6484,9 +6484,9 @@
 
 /***/ },
 /* 48 */
-[755, 11],
+[756, 11],
 /* 49 */
-[738, 719],
+[739, 719],
 /* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -7485,7 +7485,7 @@
 /* 58 */
 11,
 /* 59 */
-[738, 722],
+[739, 722],
 /* 60 */
 /***/ function(module, exports) {
 
@@ -15362,7 +15362,7 @@
 
 /***/ },
 /* 159 */
-[739, 724],
+[740, 724],
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -15659,7 +15659,7 @@
 
 /***/ },
 /* 164 */
-[738, 729],
+[739, 729],
 /* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31863,7 +31863,7 @@
 	}
 	
 	// fetch() polyfill for making API calls.
-	__webpack_require__(737);
+	__webpack_require__(738);
 	
 	// Object.assign() is commonly used with React.
 	// It will use the native implementation if it's present and isn't buggy.
@@ -32799,7 +32799,7 @@
 
 /***/ },
 /* 357 */
-[738, 720],
+[739, 720],
 /* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32933,7 +32933,7 @@
 
 /***/ },
 /* 359 */
-[739, 721],
+[740, 721],
 /* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -34015,7 +34015,7 @@
 
 /***/ },
 /* 374 */
-[738, 726],
+[739, 726],
 /* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -34179,7 +34179,7 @@
 
 /***/ },
 /* 376 */
-[738, 727],
+[739, 727],
 /* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -37542,12 +37542,13 @@
 	
 	var _pick2 = _interopRequireDefault(_pick);
 	
+	var _uid = __webpack_require__(735);
+	
+	var _uid2 = _interopRequireDefault(_uid);
+	
 	var _actions = __webpack_require__(34);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var exampleIDCounter = 0;
-	
 	
 	function createExample(_ref) {
 	  var _ref$text = _ref.text,
@@ -37557,14 +37558,13 @@
 	      _ref$entities = _ref.entities,
 	      entities = _ref$entities === undefined ? [] : _ref$entities;
 	
-	  console.log(exampleIDCounter);
 	  return {
 	    text: text,
 	    intent: intent,
 	    entities: entities,
 	    updatedAt: Date.now(),
 	    isExpanded: false,
-	    id: (++exampleIDCounter).toString()
+	    id: (0, _uid2.default)(7)
 	  };
 	}
 	
@@ -41858,7 +41858,7 @@
 	
 	if (typeof module !== "undefined" && module.exports) {
 	  module.exports.saveAs = saveAs;
-	} else if (("function" !== "undefined" && __webpack_require__(735) !== null) && (__webpack_require__(736) !== null)) {
+	} else if (("function" !== "undefined" && __webpack_require__(736) !== null) && (__webpack_require__(737) !== null)) {
 	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    return saveAs;
 	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -64743,7 +64743,7 @@
 /* 703 */
 133,
 /* 704 */
-[755, 58],
+[756, 58],
 /* 705 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -66839,31 +66839,31 @@
 
 /***/ },
 /* 718 */
-[756, 452],
+[757, 452],
 /* 719 */
-[756, 453],
+[757, 453],
 /* 720 */
-[756, 454],
+[757, 454],
 /* 721 */
-[756, 455],
+[757, 455],
 /* 722 */
-[756, 456],
+[757, 456],
 /* 723 */
-[756, 457],
+[757, 457],
 /* 724 */
-[756, 458],
+[757, 458],
 /* 725 */
-[756, 459],
+[757, 459],
 /* 726 */
-[756, 460],
+[757, 460],
 /* 727 */
-[756, 461],
+[757, 461],
 /* 728 */
-[756, 462],
+[757, 462],
 /* 729 */
-[756, 463],
+[757, 463],
 /* 730 */
-[756, 465],
+[757, 465],
 /* 731 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -66963,11 +66963,34 @@
 /* 735 */
 /***/ function(module, exports) {
 
-	module.exports = function() { throw new Error("define cannot be used indirect"); };
+	/**
+	 * Export `uid`
+	 */
+	
+	module.exports = uid;
+	
+	/**
+	 * Create a `uid`
+	 *
+	 * @param {String} len
+	 * @return {String} uid
+	 */
+	
+	function uid(len) {
+	  len = len || 7;
+	  return Math.random().toString(35).substr(2, len);
+	}
 
 
 /***/ },
 /* 736 */
+/***/ function(module, exports) {
+
+	module.exports = function() { throw new Error("define cannot be used indirect"); };
+
+
+/***/ },
+/* 737 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -66975,7 +66998,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 737 */
+/* 738 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -67414,7 +67437,7 @@
 
 
 /***/ },
-/* 738 */
+/* 739 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	'use strict';
@@ -67424,7 +67447,7 @@
 	__webpack_require__(__webpack_module_template_argument_0__);
 
 /***/ },
-/* 739 */
+/* 740 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	'use strict';
@@ -67436,7 +67459,6 @@
 	__webpack_require__(49);
 
 /***/ },
-/* 740 */,
 /* 741 */,
 /* 742 */,
 /* 743 */,
@@ -67451,7 +67473,8 @@
 /* 752 */,
 /* 753 */,
 /* 754 */,
-/* 755 */
+/* 755 */,
+/* 756 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/**
@@ -67579,7 +67602,7 @@
 	module.exports = PooledClass;
 
 /***/ },
-/* 756 */
+/* 757 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
@@ -67606,4 +67629,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.edaad106.js.map
+//# sourceMappingURL=main.b8260bc6.js.map
