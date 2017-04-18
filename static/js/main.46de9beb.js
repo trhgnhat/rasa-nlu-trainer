@@ -16124,7 +16124,8 @@
 	  highlightText: {
 	    color: 'transparent',
 	    pointerEvents: 'none',
-	    padding: '5px 8px'
+	    padding: '5px 8px',
+	    whiteSpace: 'pre'
 	  },
 	  zeroPos: {
 	    position: 'absolute',
@@ -67607,4 +67608,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.e0298de5.js.map
+//# sourceMappingURL=main.46de9beb.js.map
