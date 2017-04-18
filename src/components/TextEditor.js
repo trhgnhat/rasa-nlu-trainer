@@ -13,6 +13,7 @@ const styles = {
     color: 'transparent',
     pointerEvents: 'none',
     padding: '5px 8px',
+    whiteSpace: 'pre',
   },
   zeroPos: {
     position: 'absolute',
