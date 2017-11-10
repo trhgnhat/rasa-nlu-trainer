@@ -31,14 +31,16 @@ class ExampleEditor extends Component {
 }
 
 ExampleEditor.propTypes = {
-  text: PropTypes.string.isRequired,
-  intent: PropTypes.string.isRequired,
-  entities: PropTypes.arrayOf(PropTypes.shape({
-    start: PropTypes.number.isRequired,
-    end: PropTypes.number.isRequired,
-    value: PropTypes.string.isRequired,
-    entity: PropTypes.string.isRequired,
-  })),
+  example: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    intent: PropTypes.string.isRequired,
+    entities: PropTypes.arrayOf(PropTypes.shape({
+      start: PropTypes.number.isRequired,
+      end: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
+      entity: PropTypes.string.isRequired,
+    })),
+  })
 }
 
 export default connect(null, mapActions)(ExampleEditor)
