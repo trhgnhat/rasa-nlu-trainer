@@ -20,10 +20,7 @@ export default function () {
     state.originalSource,
     'rasa_nlu_data.common_examples',
     state.examples.map(
-      ({text, intent, entities}) => {
-        entities = trimWhitespace(text, entities)
-        return ({text, intent, entities})
-      }
+      ({text, intent, entities}) => ({text, intent, entities: trimWhitespace(text, entities)})
     )
   )
   return JSON.stringify(source, null, 2)
