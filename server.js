@@ -54,7 +54,7 @@ const sourceFile = {
 function readData(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (error, raw) => {
-      let json
+    var json = {};
 
       if (error) {
         return reject(`Can't read file "${path}"\n${error}`)
@@ -90,8 +90,8 @@ if (argv.source) {
 }
 else {
   console.log('searching for the training examples...')
-  let isSearchingOver = false
-  let inReading = 0
+  var isSearchingOver = false;
+  var inReading = 0;
 
   function checkDone() {
     if (isSearchingOver && inReading === 0) {
@@ -106,7 +106,7 @@ else {
 
   const finder = findit(process.cwd())
   finder.on('directory', function (dir, stat, stop) {
-    var base = path.basename(dir)
+    var base = path.basename(dir);
     if (base === '.git' || base === 'node_modules') stop()
   })
 
