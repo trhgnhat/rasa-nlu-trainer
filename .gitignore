@@ -15,5 +15,8 @@ build
 .testFiles
 npm-debug.log
 
-#emacs
+# emacs
 *~
+
+# ignore .idea files
+.idea/
