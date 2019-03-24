@@ -2,17 +2,59 @@
   "rasa_nlu_data": {
     "common_examples": [
       {
+        "text": "Hello",
+        "intent": "greet",
+        "entities": []
+      },
+      {
+        "text": "Bye",
+        "intent": "goodbye",
+        "entities": []
+      },
+      {
+        "text": "i am looking for houses",
+        "intent": "buy_house",
+        "entities": []
+      },
+      {
+        "text": "I am interested in buying a house and need some information.",
+        "intent": "buy_house",
+        "entities": []
+      },
+      {
+        "text": "I would like to discuss purchasing a home with you.",
+        "intent": "buy_house",
+        "entities": []
+      },
+      {
+        "text": "I have been thinking of buying a house and would like to speak with you.",
+        "intent": "buy_house",
+        "entities": []
+      },
+      {
+        "text": "I'm interested in the house in Marine Drive. What can you tell me about it?",
+        "intent": "buy_house",
+        "entities": [
+          {
+            "start": 31,
+            "end": 43,
+            "value": "Marine Drive",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "Hello",
+        "intent": "greet",
+        "entities": []
+      },
+      {
+        "text": "goodbye",
+        "intent": "goodbye",
+        "entities": []
+      },
+      {
         "text": "hey",
-        "intent": "greet",
-        "entities": []
-      },
-      {
-        "text": "howdy",
-        "intent": "greet",
-        "entities": []
-      },
-      {
-        "text": "hey there",
         "intent": "greet",
         "entities": []
       },
@@ -27,66 +69,19 @@
         "entities": []
       },
       {
-        "text": "i'm looking for a place to eat",
-        "intent": "restaurant_search",
+        "text": "heya",
+        "intent": "greet",
         "entities": []
       },
       {
-        "text": "i'm looking for a place in the north of town",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 31,
-            "end": 36,
-            "value": "north",
-            "entity": "location"
-          }
-        ]
-      },
-      {
-        "text": "show me chinese restaurants",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 8,
-            "end": 15,
-            "value": "chinese",
-            "entity": "cuisine"
-          }
-        ]
-      },
-      {
-        "text": "yes",
-        "intent": "affirm",
+        "text": "howdy",
+        "intent": "greet",
         "entities": []
       },
       {
-        "text": "yep",
-        "intent": "affirm",
+        "text": "hey there",
+        "intent": "greet",
         "entities": []
-      },
-      {
-        "text": "yeah",
-        "intent": "affirm",
-        "entities": []
-      },
-      {
-        "text": "show me a mexican place in the centre",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 31,
-            "end": 37,
-            "value": "centre",
-            "entity": "location"
-          },
-          {
-            "start": 10,
-            "end": 17,
-            "value": "mexican",
-            "entity": "cuisine"
-          }
-        ]
       },
       {
         "text": "bye",
@@ -99,86 +94,85 @@
         "entities": []
       },
       {
-        "text": "good bye",
+        "text": "bye bye",
         "intent": "goodbye",
         "entities": []
       },
       {
-        "text": "stop",
+        "text": "see ya",
         "intent": "goodbye",
         "entities": []
       },
       {
-        "text": "end",
+        "text": "see you later",
         "intent": "goodbye",
         "entities": []
       },
       {
-        "text": "i am looking for an indian spot",
-        "intent": "restaurant_search",
+        "text": "i want to find a house in Hanoi",
+        "intent": "buy_house",
         "entities": [
           {
-            "start": 20,
-            "end": 26,
-            "value": "indian",
-            "entity": "cuisine"
-          }
-        ]
-      },
-      {
-        "text": "search for restaurants",
-        "intent": "restaurant_search",
-        "entities": []
-      },
-      {
-        "text": "anywhere in the west",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 16,
-            "end": 20,
-            "value": "west",
+            "start": 26,
+            "end": 31,
+            "value": "Hanoi",
             "entity": "location"
           }
         ]
       },
       {
-        "text": "central indian restaurant",
-        "intent": "restaurant_search",
+        "text": "Is there a house in range 4 millions dollars?",
+        "intent": "buy_house",
+        "entities": [
+          {
+            "start": 26,
+            "end": 44,
+            "value": "4 millions dollars",
+            "entity": "price"
+          }
+        ]
+      },
+      {
+        "text": "under 4mil",
+        "intent": "buy_house",
+        "entities": [
+          {
+            "start": 6,
+            "end": 10,
+            "value": "4mil",
+            "entity": "price"
+          }
+        ]
+      },
+      {
+        "text": "Ho Chi Minh city",
+        "intent": "buy_house",
         "entities": [
           {
             "start": 0,
-            "end": 7,
-            "value": "central",
+            "end": 16,
+            "value": "Ho Chi Minh city",
             "entity": "location"
-          },
-          {
-            "start": 8,
-            "end": 14,
-            "value": "indian",
-            "entity": "cuisine"
           }
         ]
       },
       {
-        "text": "indeed",
-        "intent": "affirm",
-        "entities": []
-      },
-      {
-        "text": "that's right",
-        "intent": "affirm",
-        "entities": []
-      },
-      {
-        "text": "ok",
-        "intent": "affirm",
-        "entities": []
-      },
-      {
-        "text": "great",
-        "intent": "affirm",
-        "entities": []
+        "text": "i would like to buy a house in DaNang city with 1 billion vnd",
+        "intent": "",
+        "entities": [
+          {
+            "start": 31,
+            "end": 38,
+            "value": "DaNang ",
+            "entity": "location"
+          },
+          {
+            "start": 48,
+            "end": 61,
+            "value": "1 billion vnd",
+            "entity": "price"
+          }
+        ]
       }
     ]
   }
